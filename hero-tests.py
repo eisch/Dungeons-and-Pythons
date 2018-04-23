@@ -114,6 +114,26 @@ class HeroTests(unittest.TestCase):
         test.take_mana(40)
         self.assertEqual(test.get_mana(), 92)
 
+    # def test_equip_not_weapon_type(self):
+    #     with self.assertRaises(AssertionError):
+    #         self.test_hero.equip(5)
+
+    # def test_equip_weapon_type(self):
+    #     h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
+    #     w = Weapon(name="The Axe of Destiny", damage=20)
+    #     h.equip(w)
+    #     self.assertEqual(h._weapon, w)
+
+    # def test_learn_not_spell(self):
+    #     with self.assertRaises(AssertionError):
+    #         self.test_hero.learn(5)
+
+    # def test_learn_spell_type(self):
+    #     h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
+    #     s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
+    #     h.learn(s)
+    #     self.assertEqual(h._spell, s)
+
 
 
 if __name__ == "__main__":

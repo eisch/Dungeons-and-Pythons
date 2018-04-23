@@ -17,6 +17,8 @@ class Hero:
         self._health = health
         self._mana = mana
         self.mana_regeneration_rate = mana_regeneration_rate
+        self._weapon = None
+        self._spell = None
 
     def known_as(self):
         return f"{self.name} the {self.title}"
@@ -48,11 +50,13 @@ class Hero:
     def attack():
         pass
 
-    def equip(self):
-        pass
+    def equip(self, weapon):
+        #assert type(weapon) is Weapon
+        self._weapon = weapon
 
-    def learn(self):
-        pass
+    def learn(self, spell):
+        #assert type(spell) is Spell
+        self._spell = spell
 
     def take_damage(self, damage_points):
         if self.get_health() - damage_points < 0:
