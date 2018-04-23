@@ -47,8 +47,13 @@ class Hero:
         if self.get_mana() + self.mana_regeneration_rate + mana_points < 100:
             self._mana = self.get_mana() + self.mana_regeneration_rate + mana_points
 
-    def attack():
-        pass
+    def attack(self, by):
+        if self._weapon is None or self._spell is None:
+            return 0
+        # if by == "weapon":
+        #     return self._weapon.damage
+        # if by == "magic":
+        #     return self._spell.damage
 
     def equip(self, weapon):
         #assert type(weapon) is Weapon
