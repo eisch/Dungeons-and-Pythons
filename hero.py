@@ -1,3 +1,6 @@
+from weapon import Weapon
+
+
 class Hero:
     def __init__(self, name="Bron",\
                  title="Dragonslayer", health=100,\
@@ -48,7 +51,7 @@ class Hero:
             self._mana = self.get_mana() + self.mana_regeneration_rate + mana_points
 
     def attack(self, by):
-        if self._weapon is None or self._spell is None:
+        if self._weapon is None and self._spell is None:
             return 0
         if by == "weapon":
             return self._weapon.damage
@@ -56,7 +59,7 @@ class Hero:
         #     return self._spell.damage
 
     def equip(self, weapon):
-        #assert type(weapon) is Weapon
+        assert type(weapon) is Weapon
         self._weapon = weapon
 
     def learn(self, spell):
