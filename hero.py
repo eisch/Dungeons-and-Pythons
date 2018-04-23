@@ -6,48 +6,57 @@ class Hero:
         assert type(title) is str
         assert type(health) is float or type(health) is int
         assert type(mana) is float or type(mana) is int
-        assert type(mana_regeneration_rate) is float or type(mana_regeneration_rate) is int
+        assert type(mana_regeneration_rate) is float or\
+               type(mana_regeneration_rate) is int
         if health < 0 or mana < 0 or mana_regeneration_rate < 0:
             raise ValueError
         if health > 100 or mana > 100:
             raise ValueError
         self.name = name
         self.title = title
-        self.health = health
-        self.mana = mana
+        self._health = health
+        self._mana = mana
         self.mana_regeneration_rate = mana_regeneration_rate
 
     def known_as(self):
         return f"{self.name} the {self.title}"
 
     def is_alive(self):
-        return self.health > 0
+        return self._health > 0
 
     def can_cast(self):
-        return self.mana > 0
+        return self._mana > 0
 
     def get_health(self):
-        return self.health
+        return self._health
 
     def get_mana(self):
-        return self.mana
+        return self._mana
 
     def take_healing(self, healing_points):
-        if self.get_health() == 0:
+        if not self.is_alive():
             return False
         if self.get_health() + healing_points > 100:
             return False
-        self.health += healing_points
+        self._health += healing_points
         return True
 
-    def take_mana():
-        pass
+    def take_mana(self, mana_points):
+        if self.get_mana() + self.mana_regeneration_rate + mana_points < 100:
+            self._mana = self.get_mana() + self.mana_regeneration_rate + mana_points
 
     def attack():
         pass
 
+    def equip(self):
+        pass
+
+    def learn(self):
+        pass
+
     def take_damage(self, damage_points):
         if self.get_health() - damage_points < 0:
-            self.health = 0
-        self.health -= damage_points
+            self._health = 0
+        else:
+            self._health -= damage_points
 
