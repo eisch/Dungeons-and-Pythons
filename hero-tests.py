@@ -3,6 +3,9 @@ from hero import Hero
 
 
 class HeroTests(unittest.TestCase):
+    def setUp(self):
+        self.test_hero = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=5)
+
     def test_init_create_hero(self):
         Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=5)
 
@@ -38,6 +41,10 @@ class HeroTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=-5)
 
+    def test_known_as(self):
+        expected = "Bron the Dragonslayer"
+        self.assertEqual(self.test_hero.known_as(), expected)
 
-if __name__ == "__main__" :
+
+if __name__ == "__main__":
     unittest.main()

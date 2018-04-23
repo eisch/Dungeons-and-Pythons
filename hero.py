@@ -1,5 +1,7 @@
 class Hero:
-    def __init__(self, name="Bron",title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2):
+    def __init__(self, name="Bron",\
+                 title="Dragonslayer", health=100,\
+                 mana=100, mana_regeneration_rate=2):
         assert type(name) is str
         assert type(title) is str
         assert type(health) is int
@@ -12,3 +14,6 @@ class Hero:
         self.health = health
         self.mana = mana
         self.mana_regeneration_rate = mana_regeneration_rate
+
+    def known_as(self):
+        return f"{self.name} the {self.title}"
