@@ -63,7 +63,7 @@ class Hero:
         self._weapon = weapon
 
     def learn(self, spell):
-        #assert type(spell) is Spell
+        # assert type(spell) is Spell
         self._spell = spell
 
     def take_damage(self, damage_points):
@@ -71,4 +71,3 @@ class Hero:
             self._health = 0
         else:
             self._health -= damage_points
-
