@@ -32,8 +32,13 @@ class Hero:
     def get_mana(self):
         return self.mana
 
-    def take_healing():
-        pass
+    def take_healing(self, healing_points):
+        if self.get_health() == 0:
+            return False
+        if self.get_health() + healing_points > 100:
+            return False
+        self.health += healing_points
+        return True
 
     def take_mana():
         pass
@@ -41,6 +46,8 @@ class Hero:
     def attack():
         pass
 
-    def take_damage(damage):
-        pass
+    def take_damage(self, damage_points):
+        if self.get_health() - damage_points < 0:
+            self.health = 0
+        self.health -= damage_points
 
