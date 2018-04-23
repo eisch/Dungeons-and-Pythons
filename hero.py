@@ -50,8 +50,8 @@ class Hero:
     def attack(self, by):
         if self._weapon is None or self._spell is None:
             return 0
-        # if by == "weapon":
-        #     return self._weapon.damage
+        if by == "weapon":
+            return self._weapon.damage
         # if by == "magic":
         #     return self._spell.damage
 
