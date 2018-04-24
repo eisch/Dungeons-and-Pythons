@@ -71,3 +71,4 @@ class Hero:
             self._health = 0
         else:
             self._health -= damage_points
+
