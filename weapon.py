@@ -16,6 +16,9 @@ class Weapon:
     def get_damage(self):
         return self.damage
 
+    def __eq__(self, other):
+        return self.name == other.name and self.damage == other.damage
+
 
 class Spell:
     def __init__(self, name="", damage=30, mana_cost=50, cast_range=2):
