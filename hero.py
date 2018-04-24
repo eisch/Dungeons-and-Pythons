@@ -1,4 +1,4 @@
-from weapon import Weapon
+from weapon import Weapon, Spell
 
 
 class Hero:
@@ -55,15 +55,15 @@ class Hero:
             return 0
         if by == "weapon":
             return self._weapon.damage
-        # if by == "magic":
-        #     return self._spell.damage
+        if by == "magic":
+            return self._spell.damage
 
     def equip(self, weapon):
         assert type(weapon) is Weapon
         self._weapon = weapon
 
     def learn(self, spell):
-        # assert type(spell) is Spell
+        assert type(spell) is Spell
         self._spell = spell
 
     def take_damage(self, damage_points):

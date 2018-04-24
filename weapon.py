@@ -52,5 +52,4 @@ class Spell:
 
     def get_cast_range(self):
         return self.cast_range
->>>>>>> f820c121e1f7fe086173de0bcaa47e11feebd8e9
->>>>>>> eli
+

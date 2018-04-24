@@ -1,6 +1,6 @@
 import unittest
 from hero import Hero
-from weapon import Weapon
+from weapon import Weapon, Spell
 
 
 class HeroTests(unittest.TestCase):
@@ -125,15 +125,15 @@ class HeroTests(unittest.TestCase):
         h.equip(w)
         self.assertEqual(h._weapon, w)
 
-    # def test_learn_not_spell(self):
-    #     with self.assertRaises(AssertionError):
-    #         self.test_hero.learn(5)
+    def test_learn_not_spell(self):
+        with self.assertRaises(AssertionError):
+            self.test_hero.learn(5)
 
-    # def test_learn_spell_type(self):
-    #     h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
-    #     s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
-    #     h.learn(s)
-    #     self.assertEqual(h._spell, s)
+    def test_learn_spell_type(self):
+        h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
+        s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
+        h.learn(s)
+        self.assertEqual(h._spell, s)
 
     def test_attack_weapon_none(self):
         self.assertEqual(self.test_hero.attack(by="weapon"), 0)
@@ -147,11 +147,11 @@ class HeroTests(unittest.TestCase):
         h.equip(w)
         self.assertEqual(h.attack(by="weapon"), 20)
 
-    # def test_attack_spell_damage(self):
-    #     h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
-    #     s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
-    #     h.learn(s)
-    #     self.assertEqual(h.attack(by="magic"), 30)
+    def test_attack_spell_damage(self):
+        h = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
+        s = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
+        h.learn(s)
+        self.assertEqual(h.attack(by="magic"), 30)
 
 
 
