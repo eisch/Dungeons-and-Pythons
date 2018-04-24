@@ -54,16 +54,16 @@ class Hero:
         if self._weapon is None and self._spell is None:
             return 0
         if by == "weapon":
-            return self._weapon.damage
-        # if by == "magic":
-        #     return self._spell.damage
+            return self._weapon.get_damage()
+        if by == "magic":
+            return self._spell.get_damage()
 
     def equip(self, weapon):
         assert type(weapon) is Weapon
         self._weapon = weapon
 
     def learn(self, spell):
-        #assert type(spell) is Spell
+        assert type(spell) is Spell
         self._spell = spell
 
     def take_damage(self, damage_points):
