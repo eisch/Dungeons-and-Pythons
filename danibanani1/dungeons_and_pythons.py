@@ -1,4 +1,7 @@
-# TODO: FIX WHAT HAPPENS WHEN YOU FIND AN S, INSTEAD OF E, T or whatever shit you may find
+# TODO: Learn how to use motherf*cking Git
+# TODO: Decide what happens after S is encountered
+# TODO: hero_attack method
+# TODO: Custom features?
 
 import sys
 
@@ -173,7 +176,10 @@ class Dungeon:
                 sys.exit()
 
     def move_hero(self, direction):
+<<<<<<< HEAD
+=======
         # TODO: Cases when the position we're moving to is T or E
+>>>>>>> 7a2ae215147a4cd0b60b2e486aa38154f5578667
         try:
             i, j = self.hero_position
             if direction == 'up' and self.dungeon[i - 1][j] != '#' and i > 0:
@@ -202,7 +208,13 @@ class Dungeon:
                     self.hero_position = (i, j + 1)
             else:
                 return False
+<<<<<<< HEAD
+            self.hero.mana = min(self.hero.mana +
+                                 self.hero.mana_regeneration_rate,
+                                 self.hero.mana_save)
+=======
             self.hero.mana = min(self.hero.mana + self.hero.mana_regeneration_rate, self.hero.mana_save)
+>>>>>>> 7a2ae215147a4cd0b60b2e486aa38154f5578667
             return True
         except IndexError:
             return False
