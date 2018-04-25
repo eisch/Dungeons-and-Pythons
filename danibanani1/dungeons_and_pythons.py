@@ -1,4 +1,6 @@
-# TODO: FIX WHAT HAPPENS WHEN YOU FIND AN S, INSTEAD OF E, T or whatever shit you may find
+# TODO: Decide what happens after S is encountered
+# TODO: hero_attack method
+# TODO: Custom features?
 
 import sys
 
