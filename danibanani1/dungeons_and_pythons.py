@@ -1,3 +1,4 @@
+# TODO: Learn how to use motherf*cking Git
 # TODO: Decide what happens after S is encountered
 # TODO: hero_attack method
 # TODO: Custom features?
