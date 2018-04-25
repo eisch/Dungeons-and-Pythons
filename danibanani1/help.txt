@@ -25,10 +25,3 @@ attack an enemy: <map_variable_name>.hero_attack(<method_of_attack('spell'|'weap
 
 Fight:
 Coming soon...
-=======
-equip a weapon: <hero_variable_name>.equip(<weapon_name>)
-learn a spell: <hero_variable_name>.learn(<spell_name>)
-attack: <hero_variable_name>.attack(<method of attack(either spell or weapon)>)
-learn what have you got in your wapon inventory: <hero_variable_name>.get_weapon_inventory()
-learn what have you got in your spell/scroll inventory: <hero_variable_name>.get_spell_inventory()
->>>>>>> 7a2ae215147a4cd0b60b2e486aa38154f5578667
