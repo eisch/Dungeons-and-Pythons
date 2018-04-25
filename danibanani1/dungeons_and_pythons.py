@@ -86,7 +86,7 @@ class Hero:
 class Weapon:
     def __init__(self, name, damage):
         self.name = name
-        self.damage = damage
+        self.damage = int(damage)
 
     def __str__(self):
         return '{} with damage of {}'.format(self.name, self.damage)
@@ -157,6 +157,7 @@ class Dungeon:
             self.dungeon = file.read().splitlines()
             for i in range(len(self.dungeon)):
                 self.dungeon[i] = list(self.dungeon[i])
+        self.save_respawn_points = []
 
     def print_map(self):
         for line in self.dungeon:
@@ -170,6 +171,8 @@ class Dungeon:
                 self.dungeon[i][line_index] = 'H'
                 self.hero_position = (i, line_index)
                 self.hero = hero
+                if (i, line_index) in self.save_respawn_points:
+                    self.save_respawn_points.remove((i, line_index))
                 return True
             except ValueError:
                 print('Game over')
@@ -179,26 +182,26 @@ class Dungeon:
         try:
             i, j = self.hero_position
             if direction == 'up' and self.dungeon[i - 1][j] != '#' and i > 0:
-                    self.handle_encounters(self.dungeon[i - 1][j])
+                    self.handle_encounters(i - 1, j)
                     self.dungeon[i - 1][j] = 'H'
                     self.dungeon[i][j] = '.'
                     self.hero_position = (i - 1, j)
             elif (direction == 'down' and
                   self.dungeon[i + 1][j] != '#'):
-                    self.handle_encounters(self.dungeon[i + 1][j])
+                    self.handle_encounters(i + 1, j)
                     self.dungeon[i + 1][j] = 'H'
                     self.dungeon[i][j] = '.'
                     self.hero_position = (i + 1, j)
             elif (direction == 'left' and
                   self.dungeon[i][j - 1] != '#' and
                   j > 0):
-                    self.handle_encounters(self.dungeon[i][j - 1])
+                    self.handle_encounters(i, j - 1)
                     self.dungeon[i][j - 1] = 'H'
                     self.dungeon[i][j] = '.'
                     self.hero_position = (i, j - 1)
             elif (direction == 'right' and
                   self.dungeon[i][j + 1] != '#'):
-                    self.handle_encounters(self.dungeon[i][j + 1])
+                    self.handle_encounters(i, j + 1)
                     self.dungeon[i][j + 1] = 'H'
                     self.dungeon[i][j] = '.'
                     self.hero_position = (i, j + 1)
@@ -212,13 +215,21 @@ class Dungeon:
         except IndexError:
             return False
 
-    def handle_encounters(self, encountered):
-        if encountered == 'E':
+    def handle_encounters(self, row, col):
+        for respawn_tuple in self.save_respawn_points:
+            self.dungeon[respawn_tuple[0]][respawn_tuple[1]] = 'S'
+        if self.dungeon[row][col] == 'E':
             Fight('Hero', 'Enemy')
-        if encountered == 'T':
+        elif self.dungeon[row][col] == 'T':
             self.get_treasure()
-        if encountered == 'F':
+        elif self.dungeon[row][col] == 'G':
             print('Level complete!')
+        elif self.dungeon[row][col] == 'S':
+            self.save_respawn_points.append((row, col))
+        elif self.dungeon[row][col] == '.':
+            pass
+        else:
+            print('WTF have you encountered?')
 
     def hero_attack(by):
         pass
