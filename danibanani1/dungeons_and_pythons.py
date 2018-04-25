@@ -188,6 +188,7 @@ class Dungeon:
                     self.hero_position = (i, j + 1)
             else:
                 return False
+            self.hero.mana = min(self.hero.mana + self.hero.mana_regeneration_rate, self.hero.mana_save)
             return True
         except IndexError:
             return False
