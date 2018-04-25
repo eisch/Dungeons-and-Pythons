@@ -21,7 +21,7 @@ class Hero:
         self.weapon = None
         self.spell = None
         self.weapon_inventory = [Weapon('The Axe Of Destiny', 20)]
-        self.spell_inventory = [Spell(name="Fireball",
+        self.spell_inventory = [Spell(name='Fireball',
                                       damage=30,
                                       mana_cost=50,
                                       cast_range=2)]
@@ -54,10 +54,16 @@ class Hero:
         self.mana = min(self.mana_save, self.mana + mana_points)
 
     def equip(self, weapon):
-        self.weapon = weapon
+        if weapon in self.weapon_inventory:
+            self.weapon = weapon
+        else:
+            print('You do not have that weapon in your weapon inventory!')
 
     def learn(self, spell):
-        self.spell = spell
+        if spell in self.spell_inventory:
+            self.spell = spell
+        else:
+            print("You do not have that spell in your spell inventory! ")
 
     def attack(self, by):
         if by == 'weapon':
@@ -82,6 +88,9 @@ class Weapon:
     def __str__(self):
         return '{} with damage of {}'.format(self.name, self.damage)
 
+    def __eq__(self, other):
+        return self.name == other.name and self.damage == other.damage
+
 
 class Spell:
     def __init__(self, name, damage, mana_cost, cast_range):
@@ -96,6 +105,12 @@ for the cost of {} mana in range of {}'.format(self.name,
                                                self.damage,
                                                self.mana_cost,
                                                self.cast_range)
+
+    def __eq__(self, other):
+        return (self.name == other.name and
+                self.damage == other.damage and
+                self.mana_cost == other.mana_cost and
+                self.cast_range == other.cast_range)
 
 
 class Enemy:
@@ -158,8 +173,6 @@ class Dungeon:
                 sys.exit()
 
     def move_hero(self, direction):
-        # TODO: Cases when the position we're moving to is T or E
-        # TODO: FIX IT AS THAT HERO MOTHERFUCKER TELEPORTS ACROSS THE MAP!
         try:
             i, j = self.hero_position
             if direction == 'up' and self.dungeon[i - 1][j] != '#' and i > 0:
@@ -188,6 +201,9 @@ class Dungeon:
                     self.hero_position = (i, j + 1)
             else:
                 return False
+            self.hero.mana = min(self.hero.mana +
+                                 self.hero.mana_regeneration_rate,
+                                 self.hero.mana_save)
             return True
         except IndexError:
             return False
@@ -238,11 +254,3 @@ class Fight:
     def __init__(self, hero, enemy):
         self.hero = hero
         self.enemy = enemy
-
-
-h = Hero(name="Bron",
-         title="Dragonslayer",
-         health=100, mana=100,
-         mana_regeneration_rate=2)
-a = Dungeon('dungeon1.txt')
-a.spawn(h)
