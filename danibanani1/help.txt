@@ -25,3 +25,5 @@ attack an enemy: <map_variable_name>.hero_attack(<method_of_attack('spell'|'weap
 
 Fight:
 Coming soon...
+
+end the game: exit()
