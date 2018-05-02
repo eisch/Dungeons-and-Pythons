@@ -105,7 +105,8 @@ class Dungeon:
         elif self.dungeon[row][col] == 'T':
             self.get_treasure()
         elif self.dungeon[row][col] == 'G':
-            return 'Level complete!'
+            print('Level complete!')
+            exit()
         elif self.dungeon[row][col] == 'S':
             self.save_respawn_points.append((row, col))
         elif self.dungeon[row][col] == '.':
@@ -115,13 +116,16 @@ class Dungeon:
 
     def find_closest_enemy_in_range(self, r):
         self.enemy_positon = None
+        rows = len(self.dungeon)
+        cols = len(self.dungeon[0])
         x_positions = [self.hero_position[0] + i for i in range(-r, r + 1)]
-        y_positions = [self.hero_position[1] + i for i in range(-r, r + 1)]
+        y_positions = [self.hero_position[1] + j for j in range(-r, r + 1)]
         for i, j in zip(x_positions, y_positions):
-            if self.dungeon[i][j] == 'E':
-                self.enemy_positon = [i, j]
-                break
-        self.dungeon[i][j] = '.'
+            if (i > 0 and i < rows) and (j > 0 and j < cols):
+                if self.dungeon[i][j] == 'E':
+                    self.enemy_positon = [i, j]
+                    self.dungeon[i][j] = '.'
+                    break
 
     def hero_attack(self, by):
         if by == 'spell':
@@ -132,7 +136,7 @@ class Dungeon:
             else:
                 self.temp_enemy = self.enemy
                 print(
-                    f"A fight is started between our {self.hero} and {self.enemy}")
+                    f"A fight is started between our {str(self.hero)} and Enemy with damage{str(self.enemy)}")
                 while not (self.enemy_positon[0] == self.hero_position[0] and
                            self.enemy_positon[1] == self.hero_position[1]):
 
@@ -160,7 +164,7 @@ class Dungeon:
                         continue
 
                 f = Fight(self.hero, self.enemy)
-                if not f.fight:
+                if not f.fight():
                     self.spawn(self.hero)
 
         elif by == 'weapon':
@@ -201,31 +205,78 @@ It deals {} damage for the cost of {} mana in range of {}!'.format(found[1],
                 print("You found a bag of potatoes!")
 
 
-# def main():
-#     weapon = Weapon(name="The Axe of Destiny", damage=20)
-#     spell = Spell(name="Fireball", damage=30,
-#                   mana_cost=50, cast_range=2)
-#     one = Dungeon("dungeon1.txt")
-#     one.print_map()
-#     my_hero = Hero(
-#         name="Bron", title="Dragonslayer",
-#         health=100, mana=100, mana_regeneration_rate=2)
-#     my_hero.equip(weapon)
-#     my_hero.learn(spell)
-#     my_enemy = Enemy(health=100, mana=100, damage=20)
-#     one.spawn(my_hero)
-#     one.set_enemy(my_enemy)
-#     one.print_map()
-#     print(one.move_hero("right"))
-#     one.print_map()
-#     print(one.move_hero("down"))
-#     one.print_map()
-#     one.hero_attack(by='spell')
-#     print(one.move_hero("down"))
-#     one.print_map()
-#     one.hero_attack(by='spell')
-#     one.print_map()
+def main():
+    weapon = Weapon(name="The Axe of Destiny", damage=40)
+    spell = Spell(name="Fireball", damage=50,
+                  mana_cost=50, cast_range=2)
+    one = Dungeon("dungeon1.txt")
+    one.print_map()
+    my_hero = Hero(
+        name="Bron", title="Dragonslayer",
+        health=100, mana=100, mana_regeneration_rate=2)
+    my_hero.equip(weapon)
+    my_hero.learn(spell)
+    my_enemy = Enemy(health=100, mana=100, damage=20)
+    one.spawn(my_hero)
+    one.set_enemy(my_enemy)
+
+    one.print_map()
+
+    one.move_hero("right")
+    one.print_map()
+
+    one.move_hero("down")
+    one.print_map()
+    one.hero_attack(by='spell')
+    one.print_map()
+
+    one.move_hero("down")
+    one.print_map()
+    one.hero_attack(by='spell')
+    one.print_map()
+
+    one.move_hero("down")
+    one.print_map()
+
+    one.move_hero("right")
+    one.print_map()
+
+    one.move_hero("right")
+    one.print_map()
+
+    one.move_hero("right")
+    one.print_map()
+
+    one.move_hero("right")
+    one.print_map()
+
+    one.move_hero("up")
+    one.print_map()
+
+    one.move_hero("up")
+    one.print_map()
+
+    one.move_hero("up")
+    one.print_map()
+
+    one.move_hero("right")
+    one.print_map()
+    one.move_hero("right")
+    one.print_map()
+    one.move_hero("right")
+    one.print_map()
+    one.move_hero("right")
+    one.print_map()
+
+    one.move_hero("down")
+    one.print_map()
+
+    one.move_hero("down")
+    one.print_map()
+
+    one.move_hero("down")
+    one.print_map()
 
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()

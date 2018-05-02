@@ -14,6 +14,9 @@ class Enemy:
         self.mana = mana
         self.damage = damage
 
+    def __str__(self):
+        return f'Enemy(health={self.health}, mana={self.mana}, damage={self.damage})'
+
     def is_alive(self):
         return self.health > 0
 

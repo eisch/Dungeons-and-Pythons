@@ -14,18 +14,18 @@ class Fight:
 
     def fight(self):
         while self.hero.is_alive() and self.enemy.is_alive():
-            hero_weapon = self.hero.get_most_powerfull_weapon()
-            self.enemy.take_damage(hero_weapon.get_damage())
+            if self.hero.is_alive():
+                hero_weapon = self.hero.get_most_powerfull_weapon()
+                self.enemy.take_damage(hero_weapon.get_damage())
+                print(f"Hero casts a {hero_weapon.get_name()}, hits enemy for {hero_weapon.get_damage()} dmg. Enemy health is {self.enemy.get_health()}")
 
-            print(f"Hero casts a {hero_weapon.get_name()}, hits enemy for {hero_weapon.get_damage()} dmg. Enemy health is {self.enemy.get_health()}")
-
-            self.hero.take_damage(self.enemy.attack())
-
-            print(f"Enemy hits hero for {self.enemy.attack()} dmg. Hero health is {self.hero.get_health()}.")
+            if self.enemy.is_alive():
+                self.hero.take_damage(self.enemy.attack())
+                print(f"Enemy hits hero for {self.enemy.attack()} dmg. Hero health is {self.hero.get_health()}.")
 
         if not self.hero.is_alive():
             print()
             return False
 
         print("Enemy is dead!")
-        return True
+        return True 

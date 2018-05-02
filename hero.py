@@ -28,6 +28,9 @@ class Hero:
                                       mana_cost=50,
                                       cast_range=2)]
 
+    def __str__(self):
+        return f'Hero(name={self.name}, title={self.title}, health={self.health}, mana={self.mana}, mana_rate={self.mana_regeneration_rate},)'
+
     def known_as(self):
         return f"{self.name} the {self.title}"
 
