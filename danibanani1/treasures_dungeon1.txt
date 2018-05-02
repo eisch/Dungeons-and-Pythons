@@ -1,6 +1,0 @@
-health potion
-mana potion
-W Cucumber 40
-W Dildo 30
-S Fart 35 30 1
-S Lightning 40 60 3
