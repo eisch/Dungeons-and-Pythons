@@ -53,7 +53,7 @@ class Hero:
         return False
 
     def take_mana(self, mana_points):
-        self.mana = min(self.mana_save, self.mana + mana_points)
+        self.mana = min(100, self.mana + mana_points)
 
     def equip(self, weapon):
         if weapon in self.weapon_inventory:
