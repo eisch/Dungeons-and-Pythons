@@ -1,5 +1,6 @@
 import unittest
 from enemy import Enemy
+from weapon_and_spell import Spell
 
 
 class EnemiesTests(unittest.TestCase):
@@ -7,6 +8,7 @@ class EnemiesTests(unittest.TestCase):
         self.enemy_one = Enemy(health=100, mana=100, damage=20)
         self.enemy_two = Enemy(health=0, mana=0, damage=0)
         self.enemy_three = Enemy(health=15, mana=25)
+        self.spell = Spell(name="Fireball", damage=30, mana_cost=50, cast_range=2)
 
     def test_init_enemy_with_negative_values(self):
         with self.subTest("test with negative health"):
@@ -56,10 +58,10 @@ class EnemiesTests(unittest.TestCase):
 
     def test_can_cast(self):
         with self.subTest("Can cast enemy one"):
-            self.assertTrue(self.enemy_one.can_cast())
+            self.assertTrue(self.enemy_one.can_cast(self.spell))
 
         with self.subTest("Can cast enemy two"):
-            self.assertFalse(self.enemy_two.can_cast())
+            self.assertFalse(self.enemy_two.can_cast(self.spell))
 
     def test_get_health(self):
         expected = 100

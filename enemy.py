@@ -36,7 +36,7 @@ class Enemy:
         return False
 
     def take_mana(self, mana_points):
-        self.mana = min(self.mana_save, self.mana + mana_points)
+        self.mana = min(100, self.mana + mana_points)
 
     def attack(self):
         return self.damage
