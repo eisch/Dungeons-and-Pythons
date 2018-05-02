@@ -16,6 +16,9 @@ class Weapon:
     def get_damage(self):
         return self.damage
 
+    def __str__(self):
+        return f'{self.name} with damage of {self.damage}'
+
     def __eq__(self, other):
         return self.name == other.name and self.damage == other.damage
 
@@ -52,3 +55,13 @@ class Spell:
 
     def get_cast_range(self):
         return self.cast_range
+
+    def __str__(self):
+        return f'{self.name} with damage of {self.damage} \
+for the cost of {self.mana_cost} mana in range of {self.cast_range}'
+
+    def __eq__(self, other):
+        return (self.name == other.name and
+                self.damage == other.damage and
+                self.mana_cost == other.mana_cost and
+                self.cast_range == other.cast_range)
