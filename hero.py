@@ -1,4 +1,4 @@
-from weapon import Weapon, Spell
+from weapon_and_spell import Weapon, Spell
 
 
 class Hero:
@@ -59,19 +59,21 @@ class Hero:
         if weapon in self.weapon_inventory:
             self.weapon = weapon
         else:
-            print('You do not have that weapon in your weapon inventory!')
+            self.weapon_inventory.append(weapon)
+            self.weapon = weapon
 
     def learn(self, spell):
         if spell in self.spell_inventory:
             self.spell = spell
         else:
-            print("You do not have that spell in your spell inventory! ")
+            self.spell_inventory.append(spell)
+            self.spell = spell
 
     def attack(self, by):
         if by == 'weapon':
-            return self.weapon.damage if self.weapon is not None else 0
+            return self.weapon.get_damage() if self.weapon is not None else 0
         if by == 'spell':
-            return self.spell.damage if self.damage is not None else 0
+            return self.spell.get_damage() if self.spell is not None else 0
 
     def get_weapon_inventory(self):
         for weapon in self.weapon_inventory:
@@ -80,3 +82,13 @@ class Hero:
     def get_spell_inventory(self):
         for spell in self.spell_inventory:
             print(spell)
+
+    def get_most_powerfull_weapon(self):
+        if self.weapon.get_damage() > self.spell.get_damage():
+            return self.weapon
+        else:
+            if self.can_cast(self.spell):
+                return self.spell
+            else:
+                print(f"Hero does not have mana for another {self.spell.get_name()}")
+                return self.weapon
