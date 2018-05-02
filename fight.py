@@ -21,7 +21,7 @@ class Fight:
             print(f"Enemy hits hero for {self.enemy.attack()} dmg. Hero health is {self.hero.get_health()}.")
 
         if not self.hero.is_alive():
-            print("Hero is dead. Game over!")
+            return False
 
-        if not self.enemy.is_alive():
-            print("Enemy is dead!")
+        print("Enemy is dead!")
+        return True

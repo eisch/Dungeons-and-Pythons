@@ -45,7 +45,7 @@ class Dungeon:
                 return True
             except ValueError:
                 print('Game over')
-                sys.exit()
+                return False
 
     def set_enemy(self, enemy):
         self.enemy = enemy
@@ -94,7 +94,8 @@ class Dungeon:
             self.dungeon[respawn_tuple[0]][respawn_tuple[1]] = 'S'
         if self.dungeon[row][col] == 'E':
             if self.hero is not None and self.enemy is not None:
-                Fight(self.hero, self.enemy)
+                if not Fight(self.hero, self.enemy):
+                    self.spawn(self.hero)
         elif self.dungeon[row][col] == 'T':
             self.get_treasure()
         elif self.dungeon[row][col] == 'G':
@@ -152,7 +153,8 @@ class Dungeon:
                         print("Enemy moves one square to the left in order to get to the hero. This is his move.")
                         continue
 
-                Fight(self.hero, self.temp_enemy)
+                if not Fight(self.hero, self.enemy):
+                    self.spawn(self.hero)
 
         elif by == 'weapon':
             print("Enemy is not close enough!")
