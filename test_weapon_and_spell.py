@@ -1,5 +1,5 @@
 import unittest
-from weapon import Weapon, Spell
+from weapon_and_spell import Weapon, Spell
 
 
 class TestWeapon(unittest.TestCase):
