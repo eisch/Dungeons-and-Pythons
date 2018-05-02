@@ -99,7 +99,8 @@ class Dungeon:
             self.dungeon[respawn_tuple[0]][respawn_tuple[1]] = 'S'
         if self.dungeon[row][col] == 'E':
             if self.hero is not None and self.enemy is not None:
-                if not Fight(self.hero, self.enemy):
+                f = Fight(self.hero, self.enemy)
+                if not f.fight():
                     self.spawn(self.hero)
         elif self.dungeon[row][col] == 'T':
             self.get_treasure()
@@ -158,7 +159,8 @@ class Dungeon:
                         print("Enemy moves one square to the left in order to get to the hero. This is his move.")
                         continue
 
-                if not Fight(self.hero, self.enemy):
+                f = Fight(self.hero, self.enemy)
+                if not f.fight:
                     self.spawn(self.hero)
 
         elif by == 'weapon':
