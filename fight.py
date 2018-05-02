@@ -5,9 +5,12 @@ from weapon_and_spell import Weapon, Spell
 
 class Fight:
     def __init__(self, hero, enemy):
+        if type(hero) is not Hero:
+            raise TypeError
+        if type(enemy) is not Enemy:
+            raise TypeError
         self.hero = hero
         self.enemy = enemy
-        self.fight()
 
     def fight(self):
         while self.hero.is_alive() and self.enemy.is_alive():
@@ -21,6 +24,7 @@ class Fight:
             print(f"Enemy hits hero for {self.enemy.attack()} dmg. Hero health is {self.hero.get_health()}.")
 
         if not self.hero.is_alive():
+            print()
             return False
 
         print("Enemy is dead!")

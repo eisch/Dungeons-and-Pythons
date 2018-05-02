@@ -30,7 +30,7 @@ class DungeonTests(unittest.TestCase):
             self.d.move(5)
 
     def test_print_map(self):
-	pass
+        pass
 
     def test_is_valid_coordinate_true(self):
         self.assertTrue(self.d.is_valid_coordinate(4, 6))
