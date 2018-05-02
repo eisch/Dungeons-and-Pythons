@@ -1,2 +1,3 @@
 __pychache__/
 dungeon-env/
+.pytest_cache/
