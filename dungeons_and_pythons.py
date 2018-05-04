@@ -142,23 +142,24 @@ class Dungeon:
 
                     self.temp_enemy.take_damage(self.hero.attack(by='spell'))
                     print(f"Hero casts a {self.hero.spell.get_name()}, hits enemy for {self.hero.attack(by='spell')} dmg. Enemy health is {self.temp_enemy.get_health()}")
-
-                    if self.enemy_positon[0] < self.hero_position[0]:
+                    if self.enemy.is_alive() is False:
+                        break
+                    if self.enemy_positon[0] < self.hero_position[0] and self.dungeon[self.enemy_positon[0] + 1][self.enemy_positon[1]] != '#':
                         self.enemy_positon[0] += 1
                         print("Enemy moves one square down in order to get to the hero. This is his move.")
                         continue
 
-                    if self.enemy_positon[0] > self.hero_position[0]:
+                    if self.enemy_positon[0] > self.hero_position[0] and self.dungeon[self.enemy_positon[0] - 1][self.enemy_positon[1]] != '#':
                         self.enemy_positon[0] -= 1
                         print("Enemy moves one square up in order to get to the hero. This is his move.")
                         continue
 
-                    if self.enemy_positon[1] < self.hero_position[1]:
+                    if self.enemy_positon[1] < self.hero_position[1] and self.dungeon[self.enemy_positon[0]][self.enemy_positon[1] + 1] != '#':
                         self.enemy_positon[1] += 1
                         print("Enemy moves one square to the right in order to get to the hero. This is his move.")
                         continue
 
-                    if self.enemy_positon[1] > self.hero_position[1]:
+                    if self.enemy_positon[1] > self.hero_position[1] and self.dungeon[self.enemy_positon[0]][self.enemy_positon[1] - 1] != '#':
                         self.enemy_positon[1] -= 1
                         print("Enemy moves one square to the left in order to get to the hero. This is his move.")
                         continue
@@ -232,6 +233,8 @@ def main():
 
     one.move_hero("down")
     one.print_map()
+    one.set_enemy(my_enemy)
+
     one.hero_attack(by='spell')
     one.print_map()
 
@@ -251,6 +254,7 @@ def main():
     one.print_map()
 
     one.move_hero("up")
+
     one.print_map()
 
     one.move_hero("up")
@@ -263,6 +267,7 @@ def main():
     one.print_map()
     one.move_hero("right")
     one.print_map()
+
     one.move_hero("right")
     one.print_map()
     one.move_hero("right")
@@ -270,6 +275,7 @@ def main():
 
     one.move_hero("down")
     one.print_map()
+
 
     one.move_hero("down")
     one.print_map()
