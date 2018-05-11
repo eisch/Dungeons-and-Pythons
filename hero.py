@@ -56,7 +56,7 @@ class Hero:
         return False
 
     def take_mana(self, mana_points):
-        self.mana = min(100, self.mana + mana_points)
+        self.mana = min(100, self.mana - mana_points)
 
     def equip(self, weapon):
         if weapon in self.weapon_inventory:
@@ -91,6 +91,7 @@ class Hero:
             return self.weapon
         else:
             if self.can_cast(self.spell):
+                self.take_mana(self.spell.get_mana_cost())
                 return self.spell
             else:
                 print(f"Hero does not have mana for another {self.spell.get_name()}")

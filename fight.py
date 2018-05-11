@@ -17,7 +17,7 @@ class Fight:
             if self.hero.is_alive():
                 hero_weapon = self.hero.get_most_powerfull_weapon()
                 self.enemy.take_damage(hero_weapon.get_damage())
-                print(f"Hero casts a {hero_weapon.get_name()}, hits enemy for {hero_weapon.get_damage()} dmg. Enemy health is {self.enemy.get_health()}")
+                print(self.hero.get_mana(), f"Hero casts a {hero_weapon.get_name()}, hits enemy for {hero_weapon.get_damage()} dmg. Enemy health is {self.enemy.get_health()}")
 
             if self.enemy.is_alive():
                 self.hero.take_damage(self.enemy.attack())
