@@ -50,6 +50,7 @@ class Dungeon:
                 return False
             except ValueError:
                 print('Game over')
+                exit()
                 return False
 
     def set_enemy(self, enemy):
@@ -98,9 +99,11 @@ class Dungeon:
         for respawn_tuple in self.save_respawn_points:
             self.dungeon[respawn_tuple[0]][respawn_tuple[1]] = 'S'
         if self.dungeon[row][col] == 'E':
+            self.set_enemy(Enemy(health=100, mana=100, damage=20))
             if self.hero is not None and self.enemy is not None:
                 f = Fight(self.hero, self.enemy)
-                if not f.fight():
+                f.fight()
+                if not self.hero.is_alive():
                     self.spawn(self.hero)
         elif self.dungeon[row][col] == 'T':
             self.get_treasure()
@@ -144,26 +147,38 @@ class Dungeon:
                     print(f"Hero casts a {self.hero.spell.get_name()}, hits enemy for {self.hero.attack(by='spell')} dmg. Enemy health is {self.temp_enemy.get_health()}")
                     if self.enemy.is_alive() is False:
                         break
-                    if self.enemy_positon[0] < self.hero_position[0] and self.dungeon[self.enemy_positon[0] + 1][self.enemy_positon[1]] != '#':
+                    if self.enemy_positon[0] < self.hero_position[0] and\
+                        self.dungeon[
+                            self.enemy_positon[0] + 1][
+                            self.enemy_positon[1]] != '#':
                         self.enemy_positon[0] += 1
                         print("Enemy moves one square down in order to get to the hero. This is his move.")
                         continue
 
-                    if self.enemy_positon[0] > self.hero_position[0] and self.dungeon[self.enemy_positon[0] - 1][self.enemy_positon[1]] != '#':
+                    if self.enemy_positon[0] > self.hero_position[0] and\
+                        self.dungeon[
+                            self.enemy_positon[0] - 1][
+                            self.enemy_positon[1]] != '#':
                         self.enemy_positon[0] -= 1
                         print("Enemy moves one square up in order to get to the hero. This is his move.")
                         continue
 
-                    if self.enemy_positon[1] < self.hero_position[1] and self.dungeon[self.enemy_positon[0]][self.enemy_positon[1] + 1] != '#':
+                    if self.enemy_positon[1] < self.hero_position[1] and\
+                        self.dungeon[
+                            self.enemy_positon[0]][
+                            self.enemy_positon[1] + 1] != '#':
                         self.enemy_positon[1] += 1
                         print("Enemy moves one square to the right in order to get to the hero. This is his move.")
                         continue
 
-                    if self.enemy_positon[1] > self.hero_position[1] and self.dungeon[self.enemy_positon[0]][self.enemy_positon[1] - 1] != '#':
+                    if self.enemy_positon[1] > self.hero_position[1] and\
+                        self.dungeon[
+                            self.enemy_positon[0]][
+                            self.enemy_positon[1] - 1] != '#':
                         self.enemy_positon[1] -= 1
                         print("Enemy moves one square to the left in order to get to the hero. This is his move.")
                         continue
-
+                self.set_enemy(Enemy(health=100, mana=100, damage=20))
                 f = Fight(self.hero, self.enemy)
                 if not f.fight():
                     self.spawn(self.hero)
@@ -207,9 +222,9 @@ It deals {} damage for the cost of {} mana in range of {}!'.format(found[1],
 
 
 def main():
-    weapon = Weapon(name="The Axe of Destiny", damage=40)
-    spell = Spell(name="Fireball", damage=50,
-                  mana_cost=50, cast_range=2)
+    weapon = Weapon(name="The Axe of Destiny", damage=30)
+    spell = Spell(name="Fireball", damage=40,
+                  mana_cost=10, cast_range=2)
     one = Dungeon("dungeon1.txt")
     one.print_map()
     my_hero = Hero(
@@ -247,6 +262,8 @@ def main():
     one.move_hero("right")
     one.print_map()
 
+    one.hero_attack(by='spell')
+    one.print_map()
     one.move_hero("right")
     one.print_map()
 
@@ -276,6 +293,8 @@ def main():
     one.move_hero("down")
     one.print_map()
 
+    one.move_hero("down")
+    one.print_map()
 
     one.move_hero("down")
     one.print_map()
